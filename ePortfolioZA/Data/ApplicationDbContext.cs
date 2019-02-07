@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ePortfolio.Models;
 
 namespace ePortfolioZA.Data
 {
@@ -12,5 +13,6 @@ namespace ePortfolioZA.Data
             : base(options)
         {
         }
+        public DbSet<ePortfolio.Models.Skill> Skills { get; set; }
     }
 }
