@@ -46,6 +46,7 @@ namespace ePortfolioZA.Controllers
         // GET: Skills/Create
         public IActionResult Create()
         {
+            CreateSkillLevels();
             return View();
         }
 
@@ -62,6 +63,7 @@ namespace ePortfolioZA.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            CreateSkillLevels();
             return View(skill);
         }
 
@@ -78,6 +80,7 @@ namespace ePortfolioZA.Controllers
             {
                 return NotFound();
             }
+            CreateSkillLevels();
             return View(skill);
         }
 
@@ -143,6 +146,18 @@ namespace ePortfolioZA.Controllers
             _context.Skills.Remove(skill);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        private void CreateSkillLevels()
+        {
+            var levelList = new List<SelectListItem>()
+            {
+                new SelectListItem{Text = "High", Value = "0"},
+                new SelectListItem{Text = "Above Average", Value = "1"},
+                new SelectListItem{Text = "Below Average", Value = "2"},
+                new SelectListItem{Text = "Low", Value = "3"}
+            };
+
+            ViewBag.SkillLevels = levelList;
         }
 
         private bool SkillExists(int id)
